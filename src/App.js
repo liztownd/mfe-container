@@ -1,11 +1,12 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MarketingAppComponent from "./components/MarketingApp";
 import Header from "./components/Header";
 import {
   StylesProvider,
   createGenerateClassName,
 } from "@material-ui/core/styles";
+import AuthAppComponent from "./components/AuthApp";
 
 const App = () => {
   const generateClassName = createGenerateClassName({
@@ -17,7 +18,10 @@ const App = () => {
       <StylesProvider generateClassName={generateClassName}>
         <div>
           <Header />
-          <MarketingAppComponent />
+          <Switch>
+            <Route path="/auth" component={AuthAppComponent} />
+            <Route path="/" component={MarketingAppComponent} />
+          </Switch>
         </div>
       </StylesProvider>
     </BrowserRouter>
