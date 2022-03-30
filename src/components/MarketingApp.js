@@ -9,6 +9,7 @@ const MarketingAppComponent = () => {
   useEffect(() => {
       const { onParentNavigate } =
     mount(ref.current, {
+      initialPath: history.location.pathname,
       // keep BrowserHistory in sync
       onNavigate: ({ pathname: nextPathname }) => {
         const { pathname } = history.location;
