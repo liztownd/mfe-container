@@ -21,7 +21,7 @@ const AuthAppComponent = ({ onSignIn }) => {
     });
 
     history.listen(onParentNavigate);
-  }, []);
+  }, [history, onSignIn]);
 
   return <div ref={ref} />;
 };
