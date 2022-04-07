@@ -22,7 +22,7 @@ const MarketingAppComponent = () => {
 
     history.listen(onParentNavigate);
 
-  }, [history]);
+  }, []);
 
   return <div ref={ref} />;
 };

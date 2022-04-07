@@ -25,7 +25,7 @@ const App = () => {
     if (isSignedIn) {
       history.push("/dashboard");
     }
-  }, [isSignedIn, history]);
+  }, [isSignedIn]);
 
   return (
     <BrowserRouter history={history}>
