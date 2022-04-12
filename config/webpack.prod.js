@@ -22,7 +22,17 @@ const prodConfig = {
                 auth: `auth@${authDomain}/auth/latest/remoteEntry.js`,
                 dashboard: `dashboard@${dashboardDomain}/dashboard/latest/remoteEntry.js`
             },
-            shared: packageJson.dependencies,
+            shared: {
+                ...deps,
+                react: {
+                  singleton: true,
+                  requiredVersion: deps["react"],
+                },
+                "react-dom": {
+                  singleton: true,
+                  requiredVersion: deps["react-dom"],
+                },
+              },
         }),
     ],
 };

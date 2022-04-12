@@ -1,7 +1,7 @@
 const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const commonConfig = require('./webpack.common');
-const packageJson = require('../package.json');
+const deps = require('../package.json').dependencies;
 
 const devConfig = {
     mode: 'development',
@@ -12,7 +12,10 @@ const devConfig = {
         port: 8080,
         historyApiFallback: {
             index: 'index.html'
-        }
+        },
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
     },
     plugins: [
         new ModuleFederationPlugin({
@@ -22,7 +25,17 @@ const devConfig = {
                 auth: 'auth@http://localhost:8082/remoteEntry.js',
                 dashboard: 'dashboard@http://localhost:8083/remoteEntry.js',
             },
-            shared: packageJson.dependencies,
+            shared: {
+                ...deps,
+                react: {
+                  singleton: true,
+                  requiredVersion: deps["react"],
+                },
+                "react-dom": {
+                  singleton: true,
+                  requiredVersion: deps["react-dom"],
+                },
+              },
         }),
     ]
 };

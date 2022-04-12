@@ -1,10 +1,10 @@
 import { mount } from "marketing/MarketingApp";
 import React, { useRef, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 const MarketingAppComponent = () => {
   const ref = useRef(null);
-  const history = useHistory();
+  const history = createBrowserHistory();
 
   useEffect(() => {
       const { onParentNavigate } =

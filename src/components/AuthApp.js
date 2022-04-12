@@ -1,10 +1,10 @@
 import { mount } from "auth/AuthApp";
 import React, { useRef, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 const AuthAppComponent = ({ onSignIn }) => {
   const ref = useRef(null);
-  const history = useHistory();
+  const history = createBrowserHistory();
 
   useEffect(() => {
     const { onParentNavigate } = mount(ref.current, {

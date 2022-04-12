@@ -1,5 +1,11 @@
 import React, { lazy, Suspense, useState, useEffect } from "react";
-import { Router, Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
+import {
+  Router,
+  Route,
+  Switch,
+  Redirect,
+  
+} from "react-router-dom";
 import Header from "./components/Header";
 import {
   StylesProvider,
@@ -17,18 +23,20 @@ const App = () => {
     productionPrefix: "co",
   });
 
+  // const navigate = useNavigate();
   const history = createBrowserHistory();
 
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
     if (isSignedIn) {
+      // navigate("/dashboard");
       history.push("/dashboard");
     }
   }, [isSignedIn]);
 
   return (
-    <BrowserRouter history={history}>
+    <Router history={history}>
       <StylesProvider generateClassName={generateClassName}>
         <div>
           <Header
@@ -37,19 +45,23 @@ const App = () => {
           />
           <Suspense fallback={<Progress />}>
             <Switch>
-              <Route path="/auth">
-                <AuthAppComponent onSignIn={() => setIsSignedIn(true)} />
-              </Route>
+              <Route
+                path="/auth"
+                >
+                  <AuthAppComponent onSignIn={() => setIsSignedIn(true)} />
+                  </Route>
               <Route path="/dashboard" exact>
                 {!isSignedIn && <Redirect to="/" />}
                 <DashboardComponent />
               </Route>
-              <Route path="/" component={MarketingAppComponent} />
+              <Route path="/" >
+              <MarketingAppComponent />
+              </Route>
             </Switch>
           </Suspense>
         </div>
       </StylesProvider>
-    </BrowserRouter>
+    </Router>
   );
 };
 
